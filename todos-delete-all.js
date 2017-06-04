@@ -1,27 +1,27 @@
-'use strict';
+'use strict'
 
-const todosReadAll = require('./todos-read-all.js');
-const todosDelete = require('./todos-delete.js');
+const todosReadAll = require('./todos-read-all.js')
+const todosDelete = require('./todos-delete.js')
 
 module.exports = (event, callback) => {
   todosReadAll(event, (error, result) => {
     if (error) {
-      callback(error);
+      callback(error)
     }
 
-    const todosTotal = result.length;
-    let todosDeleteCount = 0;
+    const todosTotal = result.length
+    let todosDeleteCount = 0
 
     result.forEach((todoItem) => {
       const deleteEvent = {
         pathParameters: {
           id: todoItem.id,
-        }
+        },
       }
 
-      todosDelete(deleteEvent, (error, result) => {
+      todosDelete(deleteEvent, (error) => {
         if (error) {
-          callback(error);
+          callback(error)
         }
 
         todosDeleteCount++
@@ -29,9 +29,9 @@ module.exports = (event, callback) => {
         if (todosDeleteCount >= todosTotal) {
           callback(error, {
             deleted: todosDeleteCount,
-          });
+          })
         }
-      });
-    });
-  });
-};
+      })
+    })
+  })
+}

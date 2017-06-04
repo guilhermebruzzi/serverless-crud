@@ -1,25 +1,25 @@
-'use strict';
+'use strict'
 
-const AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
-const uuid = require('uuid');
+const AWS = require('aws-sdk')
+const dynamoDb = new AWS.DynamoDB.DocumentClient()
+const uuid = require('uuid')
 
 module.exports = (event, callback) => {
-  const data = JSON.parse(event.body);
+  const data = JSON.parse(event.body)
 
-  data.id = uuid.v1();
-  data.createdAt = new Date().getTime();
-  data.updatedAt = new Date().getTime();
+  data.id = uuid.v1()
+  data.createdAt = new Date().getTime()
+  data.updatedAt = new Date().getTime()
 
   const params = {
     TableName: 'todos',
-    Item: data
-  };
+    Item: data,
+  }
 
-  return dynamoDb.put(params, (error, data) => {
+  return dynamoDb.put(params, (error) => {
     if (error) {
-      callback(error);
+      callback(error)
     }
-    callback(error, params.Item);
-  });
-};
+    callback(error, params.Item)
+  })
+}

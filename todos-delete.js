@@ -1,20 +1,20 @@
-'use strict';
+'use strict'
 
-const AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const AWS = require('aws-sdk')
+const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
 module.exports = (event, callback) => {
   const params = {
-    TableName : 'todos',
+    TableName: 'todos',
     Key: {
-      id: event.pathParameters.id
-    }
-  };
+      id: event.pathParameters.id,
+    },
+  }
 
-  return dynamoDb.delete(params, (error, data) => {
+  return dynamoDb.delete(params, (error) => {
     if (error) {
-      callback(error);
+      callback(error)
     }
-    callback(error, params.Key);
-  });
-};
+    callback(error, params.Key)
+  })
+}
