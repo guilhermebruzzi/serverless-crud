@@ -11,6 +11,11 @@
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.6.7",
+    "cacheman-redis": "^1.1.2",
+    "redis": "^2.7.1",
+    "serverless-dynamodb-client": "^0.0.2",
+    "serverless-dynamodb-local": "^0.2.22",
+    "serverless-offline": "^3.14.1",
     "uuid": "^2.0.3"
   },
   "devDependencies": {

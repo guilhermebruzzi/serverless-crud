@@ -1,7 +1,8 @@
 'use strict'
 
-const AWS = require('aws-sdk')
-const dynamoDb = new AWS.DynamoDB.DocumentClient()
+const dynamoDb = require('serverless-dynamodb-client')
+
+const docClient = dynamoDb.doc
 
 module.exports = (event, callback) => {
   const params = {
@@ -11,7 +12,7 @@ module.exports = (event, callback) => {
     },
   }
 
-  return dynamoDb.delete(params, (error) => {
+  return docClient.delete(params, (error) => {
     if (error) {
       callback(error)
     }

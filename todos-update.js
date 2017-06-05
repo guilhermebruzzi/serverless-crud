@@ -1,7 +1,8 @@
 'use strict'
 
-const AWS = require('aws-sdk')
-const dynamoDb = new AWS.DynamoDB.DocumentClient()
+const dynamoDb = require('serverless-dynamodb-client')
+
+const docClient = dynamoDb.doc
 
 module.exports = (event, callback) => {
   const data = JSON.parse(event.body)
@@ -22,7 +23,7 @@ module.exports = (event, callback) => {
     ReturnValues: 'UPDATED_NEW',
   }
 
-  return dynamoDb.update(params, (error, data) => {
+  return docClient.update(params, (error, data) => {
     if (error) {
       callback(error)
     }

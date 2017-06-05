@@ -1,10 +1,20 @@
 service: serverless-crud
 
+custom:
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
 provider:
   name: aws
   runtime: nodejs4.3
   region: us-east-1
   stage: dev
+  environment:
+    REDIS_HOST: ${file(./keys.yml):REDIS_HOST}
+    REDIS_PORT: ${file(./keys.yml):REDIS_PORT}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -79,3 +89,6 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: 'todos'
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline

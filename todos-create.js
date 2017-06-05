@@ -1,8 +1,9 @@
 'use strict'
 
-const AWS = require('aws-sdk')
-const dynamoDb = new AWS.DynamoDB.DocumentClient()
+const dynamoDb = require('serverless-dynamodb-client')
 const uuid = require('uuid')
+
+const docClient = dynamoDb.doc
 
 module.exports = (event, callback) => {
   const data = JSON.parse(event.body)
@@ -16,7 +17,7 @@ module.exports = (event, callback) => {
     Item: data,
   }
 
-  return dynamoDb.put(params, (error) => {
+  return docClient.put(params, (error) => {
     if (error) {
       callback(error)
     }
