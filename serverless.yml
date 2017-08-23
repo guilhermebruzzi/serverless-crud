@@ -9,18 +9,9 @@ custom:
       seed: true
 provider:
   name: aws
-  vpc:
-    securityGroupIds:
-      - sg-1abdb063
-    subnetIds:
-      - subnet-79e56f1c
-      - subnet-c73ca4fa
   runtime: nodejs4.3
   region: us-east-1
   stage: dev
-  environment:
-    REDIS_HOST: ${file(./keys.yml):REDIS_HOST}
-    REDIS_PORT: ${file(./keys.yml):REDIS_PORT}
   iamRoleStatements:
     - Effect: Allow
       Action:
